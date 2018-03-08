@@ -107,7 +107,7 @@
             });
 
             // LineageOS new API
-            Flight::route('/api/v1/@deviceType(/@romType(/@incrementalVersion))', function ( $deviceType, $romType, $incrementalVersion ){
+            Flight::route('/api/v1/build/@deviceType(/@romType(/@incrementalVersion))', function ( $deviceType, $romType, $incrementalVersion ){
               Flight::builds()->setPostData(
                 array(
                   'params' => array(

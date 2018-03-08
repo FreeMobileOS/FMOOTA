@@ -32,6 +32,8 @@
         // This will contain the build list based on the current request
     	private $builds = array();
 
+        // hold if current request has device type
+        private $device = null;
         private $postData = array();
 
         /**
@@ -86,6 +88,8 @@
         public function setPostData( $customData ){
             $this->postData = $customData;
             $this->builds = array();
+            $params = $this->postData['params'];
+            $this->device = $params['device'];
             $this->getBuilds();
         }
 
@@ -124,7 +128,9 @@
 
     	private function getBuilds() {
             // Get physical paths of where the files resides
-            $path = Flight::cfg()->get('realBasePath') . '/builds/full';
+
+            $path = Flight::cfg()->get('realBasePath') . '/builds/full' .'/' . $this->device;
+
             // Get subdirs
             $dirs = glob( $path . '/*' , GLOB_ONLYDIR );
             array_push( $dirs, $path );
