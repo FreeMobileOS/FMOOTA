@@ -21,6 +21,8 @@
         IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
         CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     */
+    // HACK: start the log
+    if (ob_get_level() == 0) ob_start();
 
     require 'vendor/autoload.php';
 
@@ -35,3 +37,4 @@
     $app
     ->setConfig( 'basePath', $protocol.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']) )
     ->run();
+    ob_end_flush();
