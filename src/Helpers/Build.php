@@ -64,7 +64,7 @@
                       LINEAGE => [SIGNED] (ex. signed)
                 )
             */
-            preg_match_all( '/(cm|lineage)-([0-9\.]+)-([\d_]+)?-([\w+]+)-([A-Za-z0-9]+)?-?([\w+]+)?/', $fileName, $tokens );
+            preg_match_all( '/(fmo)-([0-9\.]+)-([\d_]+)?-([\w+]+)-([A-Za-z0-9]+)?-?([\w+]+)?/', $fileName, $tokens );
 
             $tokens = $this->removeTrailingDashes( $tokens );
 
@@ -80,7 +80,7 @@
             $this->timestamp = intval( $this->getBuildPropValue( 'ro.build.date.utc' ) ?? filemtime($this->filePath) );
             $this->incremental = $this->getBuildPropValue( 'ro.build.version.incremental' ) ?? '';
             $this->apiLevel = $this->getBuildPropValue( 'ro.build.version.sdk' ) ?? '';
-            $this->model = $this->getBuildPropValue( 'ro.lineage.device' ) ?? $this->getBuildPropValue( 'ro.cm.device' ) ?? ( $tokens[1] == 'cm' ? $tokens[6] : $tokens[5] );
+            $this->model = $this->getBuildPropValue( 'ro.product.device' ) ?? ( $tokens[1] == 'fmo' ? $tokens[5] : $tokens[6] );
             $this->version = $tokens[2];
             $this->uid = hash( 'sha256', $this->timestamp.$this->model.$this->apiLevel, false );
 
