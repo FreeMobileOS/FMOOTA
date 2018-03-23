@@ -119,8 +119,6 @@ class Route {
         }
 
         // Attempt to match route and named parameters
-        error_log("\n preg_match: $url", 3, "/var/tmp/my-errors.log");
-        error_log("\n preg_match: $regex", 3, "/var/tmp/my-errors.log");
         if (preg_match('#^'.$regex.'(?:\?.*)?$#'.(($case_sensitive) ? '' : 'i'), $url, $matches)) {
             foreach ($ids as $k => $v) {
                 $this->params[$k] = (array_key_exists($k, $matches)) ? urldecode($matches[$k]) : null;
@@ -131,7 +129,6 @@ class Route {
             return true;
         }
 
-        error_log("\n matchURL: false", 3, "/var/tmp/my-errors.log");
         return false;
     }
 
