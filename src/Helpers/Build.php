@@ -75,8 +75,13 @@
             // Try to load the build.prop from two possible paths:
             // - builds/CURRENT_ZIP_FILE.zip/system/build.prop
             // - builds/CURRENT_ZIP_FILE.zip.prop ( which must exist )
-            $this->buildProp = explode( "\n", @file_get_contents('zip://'.$this->filePath.'#system/build.prop') ?? @file_get_contents($filePath.'.prop') );
-            // Try to fetch build.prop values. In some cases, we can provide a fallback, in other a null value will be given
+            $this->buildProp = explode( "\n", @file_get_contents('zip://'.$this->filePath.'#system/build.prop') );
+            if (empty(array_filter($this->buildProp))) {
+				error_log("\n BuildInfo: Reading build prop(if available) from: $this->filePath.prop", 3, "/var/tmp/my-errors.log");
+				$this->buildProp = explode( "\n", @file_get_contents($this->filePath.'.prop') );
+			}
+
+			// Try to fetch build.prop values. In some cases, we can provide a fallback, in other a null value will be given
             $this->timestamp = intval( $this->getBuildPropValue( 'ro.build.date.utc' ) ?? filemtime($this->filePath) );
             $this->incremental = $this->getBuildPropValue( 'ro.build.version.incremental' ) ?? '';
             $this->apiLevel = $this->getBuildPropValue( 'ro.build.version.sdk' ) ?? '';
