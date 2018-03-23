@@ -156,10 +156,12 @@
                                 }
                             } else
                                 $build = new Build( $file, $dir );
-
-                            if ( $build->isValid( $this->postData['params'] ) ) {
+                                error_log("\n HACK!!!!: Temporary not checking build isValid:", 3, "/var/tmp/my-errors.log");
                                 array_push( $this->builds , $build );
-                            }
+
+                            /*if ( $build->isValid( $this->postData['params'] ) ) {
+                                array_push( $this->builds , $build );
+                            }*/
                         }
                     }
                 }
