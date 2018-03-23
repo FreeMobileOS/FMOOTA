@@ -37,4 +37,7 @@
     $app
     ->setConfig( 'basePath', $protocol.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']) )
     ->run();
+
+    // make sure intemediate logs have nice new line at end of log file
+    error_log("\n", 3, "/var/tmp/my-errors.log");
     ob_end_flush();
