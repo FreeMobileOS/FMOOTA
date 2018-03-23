@@ -52,7 +52,7 @@
 				$tokens Schema:
 
                 array(
-                    1 => [TYPE] (ex. cm, lineage, etc.)
+                    1 => [TYPE] (ex. cm, lineage, fmo etc.)
                     2 => [VERSION] (ex. 10.1.x, 10.2, 11, etc.)
                     3 => [DATE OF BUILD] (ex. 20140130)
                     4 => [CHANNEL OF THE BUILD] (ex. RC, RC2, NIGHTLY, etc.)
